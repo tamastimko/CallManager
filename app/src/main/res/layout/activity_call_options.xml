@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="hu.uniobuda.nik.gabor_tamas.callmanager.CallOptions"
+    android:background="@color/primary_dark_material_light"
+    >
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <RadioButton
+            android:id="@+id/rBblack"
+            style="@style/myRadioButton"
+            android:text="@string/rb_blacklist_text"
+             />
+
+        <RadioButton
+            android:id="@+id/rBwhite"
+            style="@style/myRadioButton"
+            android:text="@string/rb_whitelist_text"
+            />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnadd"
+        style="@style/myButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add_new_number"
+        android:layout_below="@+id/radioGroup"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnadd"
+        android:layout_above="@+id/btnConfirmChanges"
+        />
+
+    <Switch
+        android:id="@+id/blswitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/radioGroup"
+        android:layout_toEndOf="@+id/radioGroup"
+        android:layout_above="@+id/btnadd"
+        style="@style/Base.Widget.AppCompat.CompoundButton.Switch"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        />
+
+    <Button
+        android:id="@+id/btnConfirmChanges"
+        style="@style/myButton"
+        android:layout_alignParentBottom="true"
+        android:text="@string/btn_available_numbers_update"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
