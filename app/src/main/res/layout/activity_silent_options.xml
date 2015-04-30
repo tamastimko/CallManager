@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@color/primary_dark_material_light"
+    >
+
+    <Button
+        style="@style/myButton"
+        android:id="@+id/btn_kezdo"
+        android:text="@string/startTime"
+        android:onClick="startTimePicker"
+        />
+
+    <Button
+        style="@style/myButton"
+        android:id="@+id/btn_vege"
+        android:text="@string/endTime"
+        android:layout_below="@id/btn_kezdo"
+        android:onClick="endTimePicker"
+        />
+
+    <TextView
+        style="@style/myTextView"
+        android:id="@+id/startTime"
+        android:layout_below="@id/btn_vege"
+        android:text="@string/start_no_values_yet"
+        />
+
+    <TextView
+        style="@style/myTextView"
+        android:id="@+id/endTime"
+        android:layout_below="@id/startTime"
+        android:text="@string/end_no_values_yet"
+        />
+
+
+    <RadioGroup
+        style="@style/myRadioButtonGroup"
+        android:id="@+id/radioGroup"
+        android:layout_below="@id/endTime">
+
+        <RadioButton
+            style="@style/myRadioButton"
+            android:id="@+id/rb_vibrate"
+            android:layout_below="@id/endTime"
+            android:text="@string/radioButtonVibrate"
+            />
+
+        <RadioButton
+            style="@style/myRadioButton"
+            android:id="@+id/rb_silent"
+            android:layout_below="@id/rb_vibrate"
+            android:text="@string/radioButtonSilent"
+            />
+    </RadioGroup>
+
+
+    <Button
+        style="@style/myButton"
+        android:id="@+id/Apply"
+        android:text="@string/btnApply"
+        android:layout_below="@id/radioGroup"
+        android:onClick="applyMode"
+        />
+
+    <Button
+        style="@style/myButton"
+        android:id="@+id/Cancel"
+        android:text="@string/btnCancelService"
+        android:layout_below="@id/Apply"
+        android:onClick="cancelAlarm"
+        />
+
+</RelativeLayout>
+

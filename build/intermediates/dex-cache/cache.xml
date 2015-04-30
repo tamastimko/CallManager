@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\felevesAndroid\CallManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="D:\felevesAndroid\CallManager\app\build\intermediates\pre-dexed\debug\classes-12a2ab3a16430164d271e22371513f78fa4c0c6f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Tram\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="D:\felevesAndroid\CallManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-6219dfeb18efe7f388462fe6cd7352ddd156d5a7.jar" />
+    </item>
+    <item
+        jar="D:\felevesAndroid\CallManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="D:\felevesAndroid\CallManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-b59b49b8ff4f24891e4037cc3f33da9d3b0f3f1a.jar" />
+    </item>
+    <item
+        jar="D:\felevesAndroid\CallManager\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\felevesAndroid\CallManager\app\build\intermediates\pre-dexed\debug\classes-674f68aa6804d83bd77c6568672068850f87835d.jar" />
+    </item>
+
+</items>

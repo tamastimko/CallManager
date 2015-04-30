@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textview_name"
+        android:textSize="@dimen/abc_text_size_headline_material"
+        android:layout_alignBottom="@+id/etName" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvName"
+        android:layout_toEndOf="@+id/tvName"
+        android:id="@+id/etName"
+        android:inputType="textPersonName"/>
+
+    <TextView
+        android:id="@+id/tvNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textview_number"
+        android:layout_alignBottom="@+id/etNumber"
+        android:layout_below="@+id/tvName"
+        android:textSize="@dimen/abc_text_size_headline_material"
+        android:gravity="bottom" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvNumber"
+        android:layout_toEndOf="@+id/tvNumber"
+        android:layout_below="@+id/etName"
+        android:inputType="phone"/>
+
+    <Button
+        android:id="@+id/btnNumberAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_new_given_number"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/etNumber"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
