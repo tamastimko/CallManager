@@ -137,8 +137,10 @@ public class SilentOptions extends Activity {
                     startMinute = extras.getInt("minute");
                     if (startMinute < 10) {
                         startTimeTextView.setText("Start Time: " + startHour + ":0" + startMinute);
+                        startDateString = startHour + ":0" + startMinute;
                     } else {
                         startTimeTextView.setText("Start Time: " + startHour + ":" + startMinute);
+                        startDateString = startHour + ":" + startMinute;
                     }
                     break;
 
@@ -147,14 +149,16 @@ public class SilentOptions extends Activity {
                     endMinute = extras.getInt("minute");
                     if (endMinute < 10) {
                         endTimeTextView.setText("End Time: " + endHour + ":0" + endMinute);
+                        endDateString = endHour + ":0" + endMinute;
                     } else {
                         endTimeTextView.setText("End Time: " + endHour + ":" + endMinute);
+                        endDateString = endHour + ":" + endMinute;
                     }
                     break;
             }
 
-            startDateString = String.valueOf(startHour) + ":" + String.valueOf(startMinute);
-            endDateString = String.valueOf(endHour) + ":" + String.valueOf(endMinute);
+            //startDateString = String.valueOf(startHour) + ":" + String.valueOf(startMinute);
+            //endDateString = String.valueOf(endHour) + ":" + String.valueOf(endMinute);
         }
         else if (resultCode == RESULT_CANCELED)
         {
