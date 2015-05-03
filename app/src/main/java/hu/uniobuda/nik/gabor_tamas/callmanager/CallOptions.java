@@ -267,6 +267,7 @@ public class CallOptions extends ActionBarActivity {
                 for (int i=0;i<conts.size();i++){
                     if(!conts.get(i).isChecked()){
                         conts.remove(i--);
+                        Toast.makeText(getApplicationContext(), "Done",Toast.LENGTH_SHORT).show();
                     }
                 }
                 contactsAdapter.notifyDataSetChanged();
@@ -287,6 +288,7 @@ public class CallOptions extends ActionBarActivity {
                     else
                         writeToFile(whiteFileName,fileString);
                 }
+                Toast.makeText(getApplicationContext(), "Done",Toast.LENGTH_SHORT).show();
             }
         });
     }
