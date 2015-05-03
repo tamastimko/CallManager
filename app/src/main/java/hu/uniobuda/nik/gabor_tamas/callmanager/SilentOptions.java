@@ -23,9 +23,7 @@ import android.widget.Toast;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**
- * Created by Tram on 2015.04.25..
- */
+
 public class SilentOptions extends Activity {
     Button startTimeButton, endTimeButton;
     TextView startTimeTextView, endTimeTextView;
@@ -69,7 +67,7 @@ public class SilentOptions extends Activity {
 
         startDate = null;
         endDate = null;
-        currentDate = null; //áthidaló megoldás, kitatálni egy rendes initet
+        currentDate = null; 
 
         startHour = 0;
         startMinute = 0;
@@ -81,7 +79,7 @@ public class SilentOptions extends Activity {
         currentDateString = "";
 
 
-
+        //a lementett adatok betöltése, amennyiben voltak, ha nem voltak default értékek adása
         SharedPreferences settings = getSharedPreferences(fileName,0);
         startTimeTextView.setText(settings.getString("start",defaultStartTimeTextViewContent));
         endTimeTextView.setText(settings.getString("end",defaultEndTimeTextViewContent));
@@ -91,11 +89,10 @@ public class SilentOptions extends Activity {
 
     }
 
-
+    //SharedPreference használata az aktuális adatok lementésére
     public void onStop()
     {
         super.onStop();
-        //boolean alarmUP = (PendingIntent.getBroadcast(this,1,intentAlarm,PendingIntent.FLAG_NO_CREATE)!=null);
         if(pendingIntent != null)
         {
             SharedPreferences settings = getSharedPreferences(fileName,0);
@@ -127,7 +124,7 @@ public class SilentOptions extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
+        //Megnézzük mi jött vissza, azt kiírjuk egy textViewba illetve megkapja az adott string is értékkent, amit később használunk
         if(resultCode == RESULT_OK)
         {
             Bundle extras = data.getExtras();
@@ -135,6 +132,7 @@ public class SilentOptions extends Activity {
                 case ACTIVITY_START:
                     startHour = extras.getInt("hour");
                     startMinute = extras.getInt("minute");
+                    //meg kell nézni, hogy a perc 10-nél kisebb-e, így kerüljük el ezt a formátumot: 20:9. Ehelyett lesz 20:09
                     if (startMinute < 10) {
                         startTimeTextView.setText("Start Time: " + startHour + ":0" + startMinute);
                         startDateString = startHour + ":0" + startMinute;
@@ -157,18 +155,17 @@ public class SilentOptions extends Activity {
                     break;
             }
 
-            //startDateString = String.valueOf(startHour) + ":" + String.valueOf(startMinute);
-            //endDateString = String.valueOf(endHour) + ":" + String.valueOf(endMinute);
         }
+        //ha cancellel tér vissza, akkor kiírjuk, hogy nincs beállítva érték
         else if (resultCode == RESULT_CANCELED)
         {
             switch (requestCode)
             {
                 case ACTIVITY_START:
-                    startTimeTextView.setText("Start Time: No value set");
+                    startTimeTextView.setText(getString(R.string.startTimeNoValue));
                     break;
                 case ACTIVITY_END:
-                    endTimeTextView.setText("End Time: No value set");
+                    endTimeTextView.setText(getString(R.string.endTimeNoValue));
                     break;
             }
 
@@ -177,15 +174,17 @@ public class SilentOptions extends Activity {
 
     }
 
-
+    //főképernyők, ha OK-ot nyomtak..
     public void applyMode(View view)
     {
+        //Ellenőrzés, hogy minden adat létezik-e, amire szükség van.
         if (!startDateString.equals("") && !endDateString.equals(""))
         {
             if (!startDateString.equals("0:0") && !endDateString.equals("0:0"))
             {
                 if (silentRadioBtn.isChecked() || vibrateRadioBtn.isChecked())
                 {
+                    //adatok betevése bundlebe, átadása az alarmreceiver osztálynak..
                     Bundle bundle = new Bundle();
                     bundle.putString("startDate", startDateString);
                     bundle.putString("endDate", endDateString);
@@ -203,29 +202,31 @@ public class SilentOptions extends Activity {
 
                     Long time = new GregorianCalendar().getTimeInMillis(); //1 nap = 24*60*60*1000
 
+                    //30 mp-enként nézi meg, hogy a beállított időpont megegyezik-e az aktuálissal
                     pendingIntent = PendingIntent.getBroadcast(this, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
                     existingPendingIntent = true;
                     alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time, 30 * 1000, pendingIntent);
-                    Toast.makeText(this, "Option is set", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.optionSet), Toast.LENGTH_SHORT).show();
 
+                    //Notification létrehozása
                     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
-                    mBuilder.setContentTitle("Service is running");
+                    mBuilder.setContentTitle(getString(R.string.notificationTitle));
                     mBuilder.setContentText("Between " + startDateString + " and " + endDateString);
-                    mBuilder.setTicker("Service started");
+                    mBuilder.setTicker(getString(R.string.notificationTicker));
                     mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                    mBuilder.setOngoing(true);
+                    mBuilder.setOngoing(true); //nem swipeolható
 
 
                     myNotificationManager.notify(notificationID,mBuilder.build());
 
 
                 }
-                else
+                else //Ha nem állt rendelkezésre minden adat, figyelmeztetés feldobása, hogy valami nem OK.
                 {
                     AlertDialog.Builder choseOptionDialog = new AlertDialog.Builder(this);
-                    choseOptionDialog.setTitle("Cannot Proceed");
-                    choseOptionDialog.setMessage("Please choose vibrate or silent mode!");
+                    choseOptionDialog.setTitle(getString(R.string.cannotProceed));
+                    choseOptionDialog.setMessage(getString(R.string.chooseVibrateOrSilent));
                     choseOptionDialog.setPositiveButton(R.string.PositiveButton, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -240,8 +241,8 @@ public class SilentOptions extends Activity {
             else
             {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Cannot proceed");
-                alertDialogBuilder.setMessage("Please select both the Start and the End time!");
+                alertDialogBuilder.setTitle(getString(R.string.cannotProceed));
+                alertDialogBuilder.setMessage(getString(R.string.selectStartAndEndTime));
                 alertDialogBuilder.setPositiveButton(R.string.PositiveButton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -257,8 +258,8 @@ public class SilentOptions extends Activity {
         else
         {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Cannot proceed");
-            alertDialogBuilder.setMessage("Please select the Start and End time!");
+            alertDialogBuilder.setTitle(getString(R.string.cannotProceed));
+            alertDialogBuilder.setMessage(getString(R.string.selectStartAndEndTime));
             alertDialogBuilder.setPositiveButton(R.string.PositiveButton, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -271,14 +272,15 @@ public class SilentOptions extends Activity {
         }
     }
 
+    //Ha ki akarja kapcsolni...
     public void cancelAlarm(View view)
     {
-        if (existingPendingIntent)
+        if (existingPendingIntent) //létezik-e beállított
         {
-            if(intentAlarm != null)
+            if(intentAlarm != null) //létezik-e beállított
             {
                 alarmManager.cancel(PendingIntent.getBroadcast(this, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-                Toast.makeText(this, "Service is cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.serviceCancelled), Toast.LENGTH_LONG).show();
                 existingPendingIntent = false;
                 startTimeTextView.setText(defaultStartTimeTextViewContent);
                 endTimeTextView.setText(defaultEndTimeTextViewContent);
@@ -290,10 +292,10 @@ public class SilentOptions extends Activity {
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                 myNotificationManager.cancel(notificationID);
             }
-            else
+            else //Hiba, egyenlőre nincs működő megoldásom, így kezelek annyit, hogy ne fagyjon ki, illetve egy figyelmeztetés feldobása
             {
                 AlertDialog.Builder aBuilder = new AlertDialog.Builder(this);
-                aBuilder.setTitle("Under construction...");
+                aBuilder.setTitle(getString(R.string.underConst));
                 aBuilder.setMessage("A service was started. It was set between " + startTimeTextView.getText().toString() + " and " + endTimeTextView.getText().toString() + ". For cancel, please specify a new interval.");
                 aBuilder.setPositiveButton(R.string.PositiveButton, new DialogInterface.OnClickListener() {
                     @Override
@@ -307,9 +309,9 @@ public class SilentOptions extends Activity {
             }
 
         }
-        else
+        else //ha nem volt beállítva semmi...
         {
-            Toast.makeText(this,"Nothing to do, service is not running",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.notingToDo),Toast.LENGTH_LONG).show();
         }
 
 
