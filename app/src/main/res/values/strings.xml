@@ -31,4 +31,23 @@
     <string name="cancel">Cancel</string>
     <string name="soundMgmtText">In this menu, you can set your smart phone to be in silent or vibrate mode in a specified interval.</string>
     <string name="callMgmtText">In this menu, you can specify contacts and put them on black or white lists, so they won\'t disturb you.</string>
+    
+    <string name="startTimeNoValue">Start Time: No value set</string>
+    <string name="endTimeNoValue">End Time: No value set</string>
+    <string name="optionSet">Option is set</string>
+    <string name="notificationTitle">Service is running</string>
+    <string name="notificationTicker">Service started</string>
+    <string name="cannotProceed">Cannot Proceed</string>
+    <string name="chooseVibrateOrSilent">Please choose vibrate or silent mode!</string>
+    <string name="selectStartAndEndTime">Please select both the Start and the End time!</string>
+    <string name="serviceCancelled">Service is cancelled</string>
+    <string name="underConst">Under construction...</string>
+    <string name="notingToDo">Nothing to do, service is not running</string>
+    <string name="vibrateSet">Vibrate mode is set</string>
+    <string name="silentModeSet">Silent mode is set</string>
+    <string name="normalModeSet">Normal mode is set</string>
+    
+    
+    
+    
 </resources>
