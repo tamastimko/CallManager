@@ -65,18 +65,18 @@ public class AlarmReceiver extends BroadcastReceiver {
             if (vibrate && audioManager.getRingerMode() != AudioManager.RINGER_MODE_VIBRATE)
             {
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
-                Toast.makeText(context, "Vibrate mode is set", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, context.getString(R.string.vibrateSet), Toast.LENGTH_LONG).show();
             }
             else if(silent && audioManager.getRingerMode() != AudioManager.RINGER_MODE_SILENT)
             {
                 audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                Toast.makeText(context,"Silent mode is set",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,context.getString(R.string.silentModeSet),Toast.LENGTH_LONG).show();
             }
         }
         else if (audioManager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL)
         {
             audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-            Toast.makeText(context,"Normal mode is set",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,context.getString(R.string.normalModeSet),Toast.LENGTH_LONG).show();
         }
 
     }
