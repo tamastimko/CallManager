@@ -239,7 +239,7 @@ public class CallOptions extends ActionBarActivity {
                                     btConfirmChanges.setEnabled(true);
                                 } //nem megfelelő adatok esetén nem adjuk a listába
                                 else
-                                    Toast.makeText(CallOptions.this, "no name or number", Toast.LENGTH_SHORT);
+                                    Toast.makeText(CallOptions.this, "no name or number", Toast.LENGTH_SHORT).show();
                                 customDialog.dismiss(); //Dialógus eltűntetése megadás után
                             }
                         });
