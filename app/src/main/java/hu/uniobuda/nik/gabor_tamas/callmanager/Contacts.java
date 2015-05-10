@@ -63,6 +63,8 @@ public class Contacts implements Parcelable {
 
     //a megadott számok ellenőrzése, átalakítása a híváskor való ellenőrzéshez
     static public String makeComparableNumber(String number){
+        if(number.length() < 1)
+            return "hiba";
         String numbercreate="";
         int i=0;
         if(number.substring(0,2).equals("06")) {
