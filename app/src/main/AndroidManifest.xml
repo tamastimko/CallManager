@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:hardwareAccelerated="true"
@@ -52,6 +53,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hu.uniobuda.nik.gabor_tamas.callmanager.ContactChooser" />
+        </activity>
+        
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".RejectedCallViewer"
+            android:label="RejectedCalls"
+            android:parentActivityName="hu.uniobuda.nik.gabor_tamas.callmanager.CallOptions" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RejectedCallViewer" />
         </activity>
 
         <receiver android:name="hu.uniobuda.nik.gabor_tamas.callmanager.IncomingCall" >
