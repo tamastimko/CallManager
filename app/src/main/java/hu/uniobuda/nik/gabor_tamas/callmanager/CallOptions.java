@@ -27,7 +27,7 @@ import java.util.List;
 public class CallOptions extends ActionBarActivity {
 
     Switch swManTurner;
-    Button btAddNumber, btConfirmChanges;
+    Button btAddNumber, btConfirmChanges, btCheckRejects;
     RadioButton rbBlack, rbWhite;
     ListView lvNumbers;
     List<Contacts> conts;
@@ -140,6 +140,15 @@ public class CallOptions extends ActionBarActivity {
                     }
                     btConfirmChanges.setEnabled(false);
                 }
+            }
+        });
+
+        //RejectedCall gomb kattintásfigyelője
+        btCheckRejects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CallOptions.this, RejectedCallViewer.class);
+                startActivity(i);
             }
         });
 
@@ -369,6 +378,7 @@ public class CallOptions extends ActionBarActivity {
         blackFileName="BlackListContacts";
         whiteFileName="WhiteListContacts";
         btAddNumber=(Button)findViewById(R.id.btnadd);
+        btCheckRejects=(Button)findViewById(R.id.btrejectcheck);
         swManTurner=(Switch)findViewById(R.id.blswitch);
         rbBlack=(RadioButton)findViewById(R.id.rBblack);
         rbWhite=(RadioButton)findViewById(R.id.rBwhite);
