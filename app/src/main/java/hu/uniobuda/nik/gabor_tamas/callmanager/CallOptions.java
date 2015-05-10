@@ -27,7 +27,7 @@ import java.util.List;
 public class CallOptions extends ActionBarActivity {
 
     Switch swManTurner;
-    Button btAddNumber, btConfirmChanges;
+    Button btAddNumber, btConfirmChanges, btCheckRejects;
     RadioButton rbBlack, rbWhite;
     ListView lvNumbers;
     List<Contacts> conts;
@@ -143,6 +143,15 @@ public class CallOptions extends ActionBarActivity {
             }
         });
 
+        //RejectedCall gomb kattintásfigyelője
+        btCheckRejects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CallOptions.this, RejectedCallViewer.class);
+                startActivity(i);
+            }
+        });
+
         //BlackList RadioButton változásfigyelő
         rbBlack.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -239,7 +248,7 @@ public class CallOptions extends ActionBarActivity {
                                     btConfirmChanges.setEnabled(true);
                                 } //nem megfelelő adatok esetén nem adjuk a listába
                                 else
-                                    Toast.makeText(CallOptions.this, "no name or number", Toast.LENGTH_SHORT);
+                                    Toast.makeText(CallOptions.this, "no name or number", Toast.LENGTH_SHORT).show();
                                 customDialog.dismiss(); //Dialógus eltűntetése megadás után
                             }
                         });
@@ -369,6 +378,7 @@ public class CallOptions extends ActionBarActivity {
         blackFileName="BlackListContacts";
         whiteFileName="WhiteListContacts";
         btAddNumber=(Button)findViewById(R.id.btnadd);
+        btCheckRejects=(Button)findViewById(R.id.btrejectcheck);
         swManTurner=(Switch)findViewById(R.id.blswitch);
         rbBlack=(RadioButton)findViewById(R.id.rBblack);
         rbWhite=(RadioButton)findViewById(R.id.rBwhite);
