@@ -15,6 +15,7 @@
     <string name="btn_add_new_number">Add number</string>
     <string name="btn_available_numbers_update">Confirm changes</string>
     <string name="switchbtn_turn_off_on">Turn Off/On</string>
+    <string name="reject_check_btn_name">Check Rejected Calls</string>
 
     <string name="title_activity_time_picker">TimePickerActivity</string>
     <string name="start_no_values_yet">Start Time: No value set</string>
