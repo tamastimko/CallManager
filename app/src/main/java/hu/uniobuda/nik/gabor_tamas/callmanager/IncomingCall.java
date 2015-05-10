@@ -62,6 +62,7 @@ public class IncomingCall extends BroadcastReceiver {
                 MyPhoneStateListener PhoneListener = new MyPhoneStateListener();
                 // Register listener for LISTEN_CALL_STATE
                 tmgr.listen(PhoneListener, PhoneStateListener.LISTEN_CALL_STATE);
+                done=false; //mivel az broadcast objektum nem szűnik meg, ezért 2. híváskor ez a static él, úgyhogy vissza kell állítani false-ra
             }else
                 return;
         } catch (Exception e) {
@@ -80,6 +81,9 @@ public class IncomingCall extends BroadcastReceiver {
                     tmp=numbers[i].split("\t"); //blacklistnél ha a listában levő szám hív elutasítjuk
                     if(tmp[1].equals(incomingNumber)){
                         rejectCall();
+                        Calendar cal=Calendar.getInstance();
+                        appendToFile("/rcalls", tmp[0].toString() + "\t" + tmp[1].toString() + "\t" + cal.getTime().toString()+"\n");
+                        tmgr=null;
                         break;
                     }
                 }
@@ -92,8 +96,25 @@ public class IncomingCall extends BroadcastReceiver {
                         return; //whitelistnél ha nincs a listában a szám akkor utasítjuk el
                     }
                 }
+                Calendar cal=Calendar.getInstance();
+                if(incomingNumber.length() > 0) //mivel meghívódik a metódus incomingnumber üres értékkel, azt nem akarjuk beírni
+                    appendToFile("/rcalls","WhiteListReject"+"\t"+incomingNumber+"\t"+cal.getTime().toString()+"\n");
                 rejectCall();
+                tmgr=null;
             }
+        }
+    }
+    
+    private void appendToFile(String filePath,String content){
+        FileOutputStream fos= null;
+        try {
+            fos = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath()+filePath,true);
+            OutputStreamWriter outWriter=new OutputStreamWriter(fos);
+            outWriter.append(content);
+            outWriter.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
